@@ -1,10 +1,11 @@
-// REST-GoogleAssistant must be operational
+// REST-GoogleAssistant-Server must be operational
 // see config_template.json for config structure
-// request must be installed via 'npm install request'
+// request must be installed via 'npm install'
+
 var _request = require('request');
 var _path = require('path');
 
-const CFG = readJson(_path.resolve(__dirname, 'config.json'));
+const CFG = readJson(_path.resolve(__dirname, 'config', 'config.json'));
 
 module.exports = {
     Send: function(commands) {
