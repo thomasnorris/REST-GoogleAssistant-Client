@@ -3,5 +3,5 @@
 - Once added:
     - Rename `config_template.json` to `config.json` and configure to match the server.
         - Server project found [here](https://github.com/thomasnorris/REST-GoogleAssistant-Server).
-    - Run `npm install request`.
+    - Run `npm install`.
     - Access with `var _assistant = require('path/to/client.js');`.

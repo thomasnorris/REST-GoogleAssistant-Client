@@ -1,0 +1,19 @@
+{
+  "name": "REST-GoogleAssistant-Client",
+  "version": "1.0.0",
+  "description": "- Include this project as a submodule in the desired parent project by following [these](https://git-scm.com/book/en/v2/Git-Tools-Submodules) instructions.\r - Once added:\r     - Rename `config_template.json` to `config.json` and configure to match the server.\r         - Server project found [here](https://github.com/thomasnorris/REST-GoogleAssistant-Server).\r     - Run `npm install request`.\r     - Access with `var _assistant = require('path/to/client.js');`.",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-personal:thomasnorris/REST-GoogleAssistant-Client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
