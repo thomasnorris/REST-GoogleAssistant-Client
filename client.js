@@ -2,9 +2,11 @@
 // see config_template.json for config structure
 // install packages via 'npm install'
 // this submodule does not require logging as the master program and the assistant server should handle it.
+var _path = require('path');
+var _logger = require(_path.resolve(__dirname, 'Node-Logger', 'app.js'));
+_logger.Init();
 
 var _request = require('request');
-var _path = require('path');
 
 const CFG_FILE = _path.resolve(__dirname, 'config', 'config.json');
 var _cfg = readJson(CFG_FILE);
@@ -20,11 +22,14 @@ module.exports = {
             }
 
             _request(reqOps, (err, res, body) => {
-                if (err)
-                    reject('Error: ' + err);
-
-                else if (body)
-                    resolve('Response: ' + body);
+                if (err) {
+                    _logger.Error.Async('Error sending request', err);
+                    reject(err);
+                }
+                else if (body) {
+                    _logger.Info.Async('Request sent successfully');
+                    resolve(body);
+                }
             });
         });
     }
