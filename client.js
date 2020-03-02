@@ -1,56 +1,30 @@
 // REST-GoogleAssistant-Server must be operational
 // see config_template.json for config structure
-// request must be installed via 'npm install'
+// install packages via 'npm install'
+// this submodule does not require logging as the master program and the assistant server should handle it.
 
 var _request = require('request');
 var _path = require('path');
 
-const CFG = readJson(_path.resolve(__dirname, 'config', 'config.json'));
+const CFG_FILE = _path.resolve(__dirname, 'config', 'config.json');
+var _cfg = readJson(CFG_FILE);
 
 module.exports = {
-    Send: function(commands) {
-        // if a single command is passed, convert to array
-        if (!Array.isArray(commands))
-            commands = [commands];
-
-        // build promises to send each command
-        var promiseArr = commands.map((command) => {
-            return new Promise((resolve, reject) => {
-                var reqOptions = {
-                    url:CFG.ADDRESS + '/' + CFG.ENDPOINT + '/' + encodeURI(command),
-                    headers: {
-                        [CFG.AUTH.KEY]: CFG.AUTH.VALUE
-                    }
-                }
-
-                console.log('Sending command: ', command);
-
-                _request(reqOptions, (err, res, body) => {
-                    if (err) {
-                        console.log('Error:', err);
-                        reject(err);
-                    }
-                    else if (body) {
-                        console.log('Response:', body);
-                        resolve(body);
-                    }
-                });
-            });
-        });
-
+    Send: function(command) {
         return new Promise((resolve, reject) => {
-            // run requests sequentially
-            // see: https://decembersoft.com/posts/promises-in-serial-with-array-reduce/
-            promiseArr.reduce((promiseChain, currentTask) => {
-                return promiseChain.then(chainResults =>
-                    currentTask.then(currentResult =>
-                        [...chainResults, currentResult]
-                    )
-                );
-            }, Promise.resolve([])).then((results) => {
-                resolve('Success');
-            }).catch((err) => {
-                reject('Failure');
+            var reqOps = {
+                url: _cfg.address + '/' + _cfg.endpoint + '/' + encodeURI(command),
+                headers: {
+                    [_cfg.auth.key]: _cfg.auth.value
+                }
+            }
+
+            _request(reqOps, (err, res, body) => {
+                if (err)
+                    reject('Error: ' + err);
+
+                else if (body)
+                    resolve('Response: ' + body);
             });
         });
     }

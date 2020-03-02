@@ -1,8 +1,8 @@
 {
-    "ADDRESS": "http://address:port",
-    "ENDPOINT": "no leading or trailing / here",
-    "AUTH": {
-        "KEY": "X-Auth",
-        "VALUE": ""
+    "address": "http://address:port",
+    "endpoint": "no leading or trailing / here",
+    "auto": {
+        "key": "X-Auth",
+        "value": ""
     }
 }
