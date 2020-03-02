@@ -27,7 +27,7 @@ module.exports = {
                     reject(err);
                 }
                 else if (body) {
-                    _logger.Info.Async('Request sent successfully');
+                    _logger.Info.Async('Request sent', command);
                     resolve(body);
                 }
             });
