@@ -4,7 +4,6 @@
 // this submodule does not require logging as the master program and the assistant server should handle it.
 var _path = require('path');
 var _logger = require(_path.resolve(__dirname, 'Node-Logger', 'app.js'));
-_logger.Init();
 
 var _request = require('request');
 
@@ -26,10 +25,9 @@ module.exports = {
                     _logger.Error.Async('Error sending request', err);
                     reject(err);
                 }
-                else if (body) {
-                    _logger.Info.Async('Request sent', command);
+                else if (body)
+                    // this is logged server side
                     resolve(body);
-                }
             });
         });
     }
